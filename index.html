@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Northern Utah Buyer's Leverage Playbook — MTN BUFF Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ─── TOKENS ─────────────────────────────────── */
+        :root {
+            --orange:       #b53c12;
+            --terracotta:   #d47f2f;
+            --dark:         #080201;
+            --charcoal:     #160604;
+            --off-white:    #fafafa;
+            --white:        #ffffff;
+            --ink:          #1e0a04;
+            --gray:         #696969;
+            --muted:        #ababab;
+            --border:       #e8e2de;
+
+            --display:  'Playfair Display', Georgia, serif;
+            --body:     'Poppins', system-ui, sans-serif;
+
+            --max: 1120px;
+            --pad: clamp(24px, 5vw, 56px);
+            --r:   8px;
+        }
+
+        /* ─── RESET ──────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--body);
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--ink);
+            background: var(--off-white);
+            overflow-x: hidden;
+        }
+
+        /* ─── GRAIN ──────────────────────────────────── */
+        .grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9000;
+        }
+
+        /* ─── UTILS ──────────────────────────────────── */
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 var(--pad);
+        }
+
+        .eyebrow {
+            font-family: var(--body);
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--orange);
+        }
+        .eyebrow--light { color: rgba(255,255,255,0.6); }
+
+        /* ─── NAV ─────────────────────────────────────── */
+        .nav {
+            position: absolute;
+            inset: 0 0 auto;
+            z-index: 20;
+            padding: 28px var(--pad);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+            text-decoration: none;
+        }
+        .logo-mtn  { font-family: var(--display); font-weight: 900; font-size: 20px; color: #fff; letter-spacing: 0.04em; }
+        .logo-buff { font-family: var(--display); font-weight: 900; font-size: 20px; color: var(--terracotta); letter-spacing: 0.04em; }
+        .logo-sub  { font-family: var(--body); font-size: 8.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); align-self: center; }
+
+        .nav-phone {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            transition: color 0.2s;
+        }
+        .nav-phone:hover { color: #fff; }
+
+        /* ─── HERO ───────────────────────────────────── */
+        .hero {
+            position: relative;
+            height: 100svh;
+            min-height: 580px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(
+                175deg,
+                #060101 0%,
+                #1c0905 16%,
+                #5e1504 40%,
+                #a83410 62%,
+                #c8551a 78%,
+                #d47f2f 100%
+            );
+        }
+
+        /* Mountain SVG layers */
+        .mountains {
+            position: absolute;
+            inset: auto 0 0;
+            height: 52%;
+            pointer-events: none;
+        }
+        .mountains svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Horizon glow */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 38%;
+            left: 0; right: 0;
+            height: 120px;
+            background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(212,127,47,0.28), transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 0 var(--pad);
+            max-width: 860px;
+        }
+
+        .hero-eyebrow {
+            display: block;
+            margin-bottom: 22px;
+            animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+        }
+
+        .hero-title {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: clamp(44px, 8.5vw, 96px);
+            line-height: 1.0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.015em;
+            margin-bottom: 24px;
+            animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both;
+        }
+        .hero-title em {
+            font-style: italic;
+            font-weight: 700;
+            color: var(--terracotta);
+            display: block;
+        }
+
+        .hero-sub {
+            font-size: clamp(14px, 1.8vw, 17px);
+            font-weight: 300;
+            color: rgba(255,255,255,0.78);
+            letter-spacing: 0.02em;
+            max-width: 500px;
+            margin: 0 auto;
+            animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s both;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 1.1s both;
+        }
+        .hero-scroll-label {
+            font-size: 9px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.38);
+        }
+        .hero-scroll-line {
+            width: 1px;
+            height: 44px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        /* ─── INTRO ──────────────────────────────────── */
+        .intro { background: var(--white); padding: 96px 0; }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 72px;
+            align-items: start;
+        }
+
+        .author-block { position: sticky; top: 48px; }
+
+        .author-initials {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange), var(--terracotta));
+            display: grid;
+            place-items: center;
+            font-family: var(--display);
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 18px;
+        }
+
+        .author-name {
+            font-family: var(--display);
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 3px;
+        }
+        .author-role {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .author-rule {
+            width: 32px; height: 2px;
+            background: var(--orange);
+            margin: 18px 0;
+        }
+        .author-quote {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--gray);
+            line-height: 1.65;
+        }
+
+        .intro-copy .eyebrow { display: block; margin-bottom: 18px; }
+
+        .intro-heading {
+            font-family: var(--display);
+            font-size: clamp(26px, 3.2vw, 38px);
+            font-weight: 700;
+            line-height: 1.22;
+            color: var(--ink);
+            margin-bottom: 28px;
+        }
+
+        .intro-p {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.85;
+            margin-bottom: 18px;
+        }
+        .intro-p strong { color: var(--ink); font-weight: 600; }
+
+        .intro-sig {
+            margin-top: 28px;
+            font-family: var(--display);
+            font-style: italic;
+            font-size: 20px;
+            color: var(--orange);
+        }
+        .intro-sig-name {
+            font-family: var(--body);
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+        }
+
+        /* ─── TABLE ──────────────────────────────────── */
+        .table-section {
+            margin-top: 60px;
+            padding-top: 52px;
+            border-top: 1px solid var(--border);
+        }
+
+        .table-eyebrow { display: block; margin-bottom: 22px; }
+
+        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        thead th {
+            padding: 11px 22px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-align: left;
+        }
+        thead th:first-child { color: var(--muted); }
+        thead .th-2022 { color: var(--muted); background: rgba(0,0,0,0.025); }
+        thead .th-2026 { color: #fff; background: var(--orange); border-radius: 5px 5px 0 0; }
+
+        tbody tr { border-bottom: 1px solid var(--border); }
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr:nth-child(odd) { background: rgba(0,0,0,0.012); }
+        td { padding: 15px 22px; color: var(--gray); }
+        td:first-child { font-weight: 500; color: var(--ink); }
+        td.td-2026 { color: var(--orange); font-weight: 600; background: rgba(181,60,18,0.035); }
+
+        .table-note {
+            margin-top: 11px;
+            font-size: 11px;
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        /* ─── LEVERS HEADER ──────────────────────────── */
+        .levers-intro {
+            background: var(--off-white);
+            padding: 88px 0 56px;
+            text-align: center;
+        }
+        .levers-intro .eyebrow { display: block; margin-bottom: 14px; }
+        .levers-intro-headline {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: clamp(34px, 5.5vw, 62px);
+            text-transform: uppercase;
+            letter-spacing: -0.015em;
+            line-height: 1.05;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+        .levers-intro-sub {
+            font-size: 15px;
+            color: var(--gray);
+            font-weight: 300;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .levers-rule {
+            width: 48px; height: 3px;
+            background: var(--orange);
+            margin: 28px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ─── CARDS GRID ─────────────────────────────── */
+        .levers-grid {
+            background: var(--off-white);
+            padding: 8px 0 96px;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        /* ─── CARD ───────────────────────────────────── */
+        .card {
+            background: var(--white);
+            border-radius: var(--r);
+            padding: 38px 36px 34px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 16px 40px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.32s cubic-bezier(0.16,1,0.3,1),
+                        box-shadow 0.32s cubic-bezier(0.16,1,0.3,1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 28px 56px rgba(0,0,0,0.1);
+        }
+
+        .card-bg-num {
+            position: absolute;
+            top: -14px; right: 14px;
+            font-family: var(--display);
+            font-size: 140px;
+            font-weight: 900;
+            color: rgba(181,60,18,0.048);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+            letter-spacing: -0.02em;
+        }
+
+        .card-num {
+            font-family: var(--body);
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--orange);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-family: var(--display);
+            font-size: 19px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            color: var(--ink);
+            margin-bottom: 13px;
+            line-height: 1.18;
+        }
+
+        .card-body {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .callout {
+            background: rgba(212,127,47,0.09);
+            border-left: 3px solid var(--terracotta);
+            border-radius: 0 5px 5px 0;
+            padding: 13px 16px;
+            margin-bottom: 16px;
+        }
+        .callout p {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7a3800;
+            line-height: 1.55;
+        }
+
+        .card-note {
+            font-size: 12px;
+            font-style: italic;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .card-if {
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .card-if-label {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--orange);
+            display: block;
+            margin-bottom: 5px;
+        }
+        .card-if-text {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.65;
+        }
+
+        /* Card 07 spans full width */
+        .card--wide {
+            grid-column: 1 / -1;
+        }
+        .card--wide .card-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        /* ─── BONUS ──────────────────────────────────── */
+        .bonus {
+            background: var(--orange);
+            padding: 80px 0;
+        }
+        .bonus-wrap { max-width: 900px; margin: 0 auto; padding: 0 var(--pad); }
+
+        .bonus .eyebrow--light { display: block; margin-bottom: 14px; }
+
+        .bonus-headline {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: clamp(28px, 4.5vw, 48px);
+            text-transform: uppercase;
+            letter-spacing: -0.015em;
+            line-height: 1.06;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .bonus-lead {
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 38px;
+        }
+
+        .bonus-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 34px;
+        }
+
+        .bonus-card {
+            background: rgba(255,255,255,0.11);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: var(--r);
+            padding: 26px;
+            backdrop-filter: blur(6px);
+        }
+
+        .bonus-card-tag {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .bonus-card-name {
+            font-family: var(--display);
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .bonus-card-amount {
+            font-family: var(--display);
+            font-size: 34px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .bonus-card-amount sub {
+            font-family: var(--body);
+            font-size: 12px;
+            font-weight: 400;
+            vertical-align: baseline;
+            opacity: 0.7;
+        }
+
+        .bonus-card-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.65;
+        }
+
+        .bonus-note {
+            font-size: 14px;
+            color: rgba(255,255,255,0.78);
+            font-style: italic;
+        }
+        .bonus-note strong { font-style: normal; color: #fff; }
+
+        /* ─── CTA ────────────────────────────────────── */
+        .cta {
+            background: var(--charcoal);
+            padding: 104px 0;
+        }
+        .cta-inner {
+            max-width: 680px;
+            text-align: center;
+        }
+        .cta .eyebrow {
+            display: block;
+            margin-bottom: 18px;
+            color: rgba(212,127,47,0.85);
+        }
+
+        .cta-headline {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(30px, 4vw, 48px);
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        .cta-headline em { font-style: italic; color: var(--terracotta); }
+
+        .cta-body {
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.85;
+            margin-bottom: 44px;
+        }
+        .cta-body em { color: rgba(255,255,255,0.82); font-style: italic; }
+
+        .btn {
+            display: inline-block;
+            background: var(--orange);
+            color: #fff;
+            font-family: var(--body);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 18px 44px;
+            border-radius: 5px;
+            transition: background 0.22s ease, transform 0.22s ease;
+        }
+        .btn:hover { background: var(--terracotta); transform: translateY(-2px); }
+
+        .cta-aside {
+            margin-top: 18px;
+            font-size: 12px;
+            font-style: italic;
+            color: rgba(255,255,255,0.28);
+        }
+
+        /* ─── FOOTER ─────────────────────────────────── */
+        .footer {
+            background: var(--dark);
+            padding: 52px var(--pad);
+            text-align: center;
+        }
+        .footer-logo { justify-content: center; margin-bottom: 14px; }
+        .footer-tagline {
+            font-family: var(--display);
+            font-style: italic;
+            font-size: 15px;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 18px;
+        }
+        .footer-links {
+            font-size: 13px;
+            color: rgba(255,255,255,0.32);
+            line-height: 2.2;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--terracotta); }
+        .footer-sep { opacity: 0.25; margin: 0 6px; }
+
+        .footer-disclaimer {
+            margin-top: 26px;
+            font-size: 10.5px;
+            color: rgba(255,255,255,0.18);
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        /* ─── ANIMATIONS ─────────────────────────────── */
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+            50%       { opacity: 1;   transform: scaleY(1); }
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
+                        transform 0.75s cubic-bezier(0.16,1,0.3,1);
+        }
+        [data-reveal].visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────── */
+        @media (max-width: 860px) {
+            .intro-grid { grid-template-columns: 1fr; gap: 36px; }
+            .author-block {
+                position: static;
+                display: flex;
+                align-items: center;
+                gap: 18px;
+            }
+            .author-initials { width: 64px; height: 64px; font-size: 20px; margin: 0; flex-shrink: 0; }
+            .author-rule, .author-quote { display: none; }
+
+            .cards { grid-template-columns: 1fr; }
+            .card--wide .card-inner { grid-template-columns: 1fr; gap: 0; }
+            .card--wide { grid-column: auto; }
+
+            .bonus-cards { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 540px) {
+            .logo-sub { display: none; }
+            .hero-title { letter-spacing: -0.025em; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── GRAIN ─────────────────────────────────────────── -->
+<svg class="grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="g">
+        <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#g)" opacity="0.038"/>
+</svg>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<header>
+    <div class="hero">
+        <nav class="nav" role="navigation" aria-label="Site navigation">
+            <a href="https://mtnbuff.com" class="logo" aria-label="MTN BUFF Real Estate home">
+                <span class="logo-mtn">MTN</span>
+                <span class="logo-buff">BUFF</span>
+                <span class="logo-sub">Real Estate</span>
+            </a>
+            <a href="tel:3856006005" class="nav-phone">385-600-6005</a>
+        </nav>
+
+        <!-- CSS Mountain landscape -->
+        <div class="mountains" aria-hidden="true">
+            <svg viewBox="0 0 1440 480" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Warm horizon glow -->
+                <ellipse cx="720" cy="10" rx="580" ry="80" fill="rgba(212,127,47,0.2)"/>
+
+                <!-- Far range — orange-haze silhouette -->
+                <path d="M0,340 L48,295 L96,315 L155,252 L210,278 L268,215 L322,242 L380,188 L434,215
+                         L490,172 L548,196 L604,158 L660,180 L715,148 L770,168 L824,145 L878,165
+                         L930,150 L982,172 L1036,154 L1090,175 L1144,158 L1198,176 L1255,160
+                         L1310,174 L1368,158 L1440,168 L1440,480 L0,480 Z"
+                      fill="rgba(206,112,38,0.36)"/>
+
+                <!-- Mid range — deep earthy brown -->
+                <path d="M0,395 L65,360 L138,378 L210,342 L282,364 L355,325 L428,348 L500,310
+                         L572,335 L644,300 L718,325 L792,295 L866,318 L940,295 L1014,320
+                         L1088,298 L1162,320 L1238,302 L1316,322 L1440,308 L1440,480 L0,480 Z"
+                      fill="rgba(72,15,3,0.82)"/>
+
+                <!-- Near range — near-black foreground -->
+                <path d="M0,438 L82,415 L168,428 L255,408 L342,422 L428,405 L515,420 L602,402
+                         L688,418 L775,398 L862,415 L948,396 L1035,414 L1122,397 L1210,412
+                         L1300,398 L1380,412 L1440,402 L1440,480 L0,480 Z"
+                      fill="rgba(6,1,0,0.96)"/>
+
+                <!-- Ground strip -->
+                <rect x="0" y="474" width="1440" height="8" fill="#040100"/>
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <span class="eyebrow eyebrow--light hero-eyebrow">The MTN BUFF Free Guide · Northern Utah</span>
+            <h1 class="hero-title">
+                The Northern Utah
+                <em>Buyer's Leverage</em>
+                Playbook
+            </h1>
+            <p class="hero-sub">
+                7 things you can negotiate right now that sellers would have laughed at in 2022.
+            </p>
+        </div>
+
+        <div class="hero-scroll" aria-hidden="true">
+            <span class="hero-scroll-label">Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </div>
+</header>
+
+<!-- ── INTRO ─────────────────────────────────────────── -->
+<section class="intro" aria-labelledby="intro-h">
+    <div class="wrap">
+        <div class="intro-grid">
+
+            <div class="author-block" data-reveal>
+                <div class="author-initials" aria-hidden="true">PA</div>
+                <div>
+                    <p class="author-name">Paden Anderson</p>
+                    <p class="author-role">Broker · MTN BUFF Real Estate</p>
+                    <div class="author-rule" aria-hidden="true"></div>
+                    <p class="author-quote">"We eat, breathe, and sleep Northern Utah real estate — so you don't have to figure it out alone."</p>
+                </div>
+            </div>
+
+            <div class="intro-copy">
+                <span class="eyebrow" data-reveal>A Note From Paden</span>
+                <h2 class="intro-heading" id="intro-h" data-reveal data-delay="80">
+                    The market shifted.<br>Most buyers haven't caught up.
+                </h2>
+                <p class="intro-p" data-reveal data-delay="140">
+                    If you tried to buy a home in 2021 or 2022, you remember how it felt. Waiving inspections. Offering $40K over asking. Losing anyway. It was bananas, and honestly not a great time to be a buyer.
+                </p>
+                <p class="intro-p" data-reveal data-delay="180">
+                    Here's what most people haven't caught up to yet: <strong>that market is gone.</strong>
+                </p>
+                <p class="intro-p" data-reveal data-delay="220">
+                    In Northern Utah right now, homes are sitting on the market an average of 57 days — up from 49 a year ago. Active inventory in Weber County climbed over 30% year-over-year. Nearly 60% of Utah homes required at least one price cut before selling.
+                </p>
+                <p class="intro-p" data-reveal data-delay="260">
+                    The leverage has shifted. Buyers have tools at the table that simply didn't exist three years ago — and most buyers aren't using them because they don't know they can. That's what this guide is about.
+                </p>
+                <div data-reveal data-delay="300">
+                    <p class="intro-sig">— Paden Anderson</p>
+                    <p class="intro-sig-name">Broker, MTN BUFF Real Estate · Ogden, Utah</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market comparison table -->
+        <div class="table-section" data-reveal>
+            <span class="eyebrow table-eyebrow">The Numbers Don't Lie</span>
+            <div class="table-scroll" role="region" aria-label="Northern Utah housing market: 2022 vs 2026">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" class="th-2022">2022</th>
+                            <th scope="col" class="th-2026">2026</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Average days on market (Ogden)</td>
+                            <td class="th-2022">21 days</td>
+                            <td class="td-2026">57 days</td>
+                        </tr>
+                        <tr>
+                            <td>Buyers waiving inspections</td>
+                            <td class="th-2022">Common</td>
+                            <td class="td-2026">Rare</td>
+                        </tr>
+                        <tr>
+                            <td>Seller concessions</td>
+                            <td class="th-2022">Almost never</td>
+                            <td class="td-2026">Negotiable</td>
+                        </tr>
+                        <tr>
+                            <td>Price reductions before selling</td>
+                            <td class="th-2022">Uncommon</td>
+                            <td class="td-2026">~60% of listings</td>
+                        </tr>
+                        <tr>
+                            <td>Buyer negotiating power</td>
+                            <td class="th-2022">Low</td>
+                            <td class="td-2026">Back.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-note">Weber County &amp; Ogden metro data, 2025–2026. Sources: Redfin, Utah Association of REALTORS®, bestutahrealestate.com</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── LEVERS INTRO ───────────────────────────────────── -->
+<section class="levers-intro" aria-labelledby="levers-h">
+    <div class="wrap">
+        <span class="eyebrow" data-reveal>The 7 Levers</span>
+        <h2 class="levers-intro-headline" id="levers-h" data-reveal data-delay="80">
+            What You Can Ask<br>For Right Now
+        </h2>
+        <p class="levers-intro-sub" data-reveal data-delay="160">
+            Each comes with real dollar values — because vague advice doesn't help you at the negotiating table.
+        </p>
+        <div class="levers-rule" data-reveal data-delay="220" aria-hidden="true"></div>
+    </div>
+</section>
+
+<!-- ── CARDS ─────────────────────────────────────────── -->
+<section class="levers-grid" aria-label="Seven negotiation levers for home buyers">
+    <div class="wrap">
+        <div class="cards">
+
+            <!-- 01 -->
+            <article class="card" data-reveal>
+                <span class="card-bg-num" aria-hidden="true">01</span>
+                <span class="card-num">01 /</span>
+                <h3 class="card-title">The Rate Buydown</h3>
+                <p class="card-body">Ask the seller to pay cash at closing to permanently lower your interest rate — or to cover the first two years at a reduced rate (called a "2-1 buydown").</p>
+                <div class="callout" role="note" aria-label="Dollar value">
+                    <p>💰 Worth up to $400/month in year one on a $400K home. That's $4,800 you keep in year one alone.</p>
+                </div>
+                <p class="card-note">In 2022: Sellers laughed at this. Now it's a standard ask.</p>
+                <div class="card-if">
+                    <span class="card-if-label">Ask for this if…</span>
+                    <p class="card-if-text">You're stretching to afford the monthly payment. Even shaving half a point off your rate makes a real dent over 30 years — and the seller is motivated to close.</p>
+                </div>
+            </article>
+
+            <!-- 02 -->
+            <article class="card" data-reveal data-delay="100">
+                <span class="card-bg-num" aria-hidden="true">02</span>
+                <span class="card-num">02 /</span>
+                <h3 class="card-title">Closing Cost Credits</h3>
+                <p class="card-body">Ask the seller to cover some or all of your closing costs. They typically run 2–5% of the purchase price — money you'd otherwise bring out of pocket on top of your down payment.</p>
+                <div class="callout" role="note" aria-label="Dollar value">
+                    <p>💰 On a $400K home: up to $20,000 you don't have to bring to closing.</p>
+                </div>
+                <p class="card-note">This is now one of the most common concessions in Northern Utah.</p>
+                <div class="card-if">
+                    <span class="card-if-label">Ask for this if…</span>
+                    <p class="card-if-text">Your down payment is eating up most of your savings. Getting closing costs covered means you keep cash in your pocket for repairs, moving, or just breathing room after you move in.</p>
+                </div>
+            </article>
+
+            <!-- 03 -->
+            <article class="card" data-reveal>
+                <span class="card-bg-num" aria-hidden="true">03</span>
+                <span class="card-num">03 /</span>
+                <h3 class="card-title">Inspection Repairs &amp; Credits</h3>
+                <p class="card-body">You can now inspect the home AND negotiate. After inspection, ask for a repair credit (cash at closing), require the seller to fix specific issues, or use findings to renegotiate the price.</p>
+                <div class="callout" role="note" aria-label="Dollar value">
+                    <p>💰 Inspection credits commonly run $2,000–$10,000+ depending on what's found.</p>
+                </div>
+                <p class="card-note">In 2022: Buyers waived inspections entirely just to compete. That era is over.</p>
+                <div class="card-if">
+                    <span class="card-if-label">Ask for this if…</span>
+                    <p class="card-if-text">The home is older or hasn't been updated in a while. Even a "clean" inspection on a 20-year-old house will surface deferred maintenance — and that's negotiating ammo.</p>
+                </div>
+            </article>
+
+            <!-- 04 -->
+            <article class="card" data-reveal data-delay="100">
+                <span class="card-bg-num" aria-hidden="true">04</span>
+                <span class="card-num">04 /</span>
+                <h3 class="card-title">Post-Appraisal Price Reduction</h3>
+                <p class="card-body">If the home appraises below your offer price, you can now negotiate the purchase price down to match — or walk away with your earnest money intact.</p>
+                <div class="callout" role="note" aria-label="Dollar value">
+                    <p>💰 In 2022, buyers routinely paid $20K–$50K over appraisal. You don't have to do that anymore.</p>
+                </div>
+                <p class="card-note">Sellers understand this. Most would rather adjust than restart.</p>
+                <div class="card-if">
+                    <span class="card-if-label">Ask for this if…</span>
+                    <p class="card-if-text">The home has been sitting a while or had a previous price drop. A seller who's already reduced once is far more likely to accept an appraised value than gamble on finding a better offer.</p>
+                </div>
+            </article>
+
+            <!-- 05 -->
+            <article class="card" data-reveal>
+                <span class="card-bg-num" aria-hidden="true">05</span>
+                <span class="card-num">05 /</span>
+                <h3 class="card-title">Appliances &amp; Personal Property</h3>
+                <p class="card-body">Washers, dryers, refrigerators, outdoor furniture, window treatments — sellers will often throw these in now to sweeten a deal that's sitting.</p>
+                <div class="callout" role="note" aria-label="Dollar value">
+                    <p>💰 Replacing appliances yourself runs $3,000–$8,000 easily. Just ask.</p>
+                </div>
+                <p class="card-note">In 2022: You were lucky if the seller left the toilet paper.</p>
+                <div class="card-if">
+                    <span class="card-if-label">Ask for this if…</span>
+                    <p class="card-if-text">The home has been on the market 30+ days with no offers. A seller who's anxious to move on is usually happy to leave things behind rather than deal with hauling them out.</p>
+                </div>
+            </article>
+
+            <!-- 06 -->
+            <article class="card" data-reveal data-delay="100">
+                <span class="card-bg-num" aria-hidden="true">06</span>
+                <span class="card-num">06 /</span>
+                <h3 class="card-title">Flexible Closing Timeline</h3>
+                <p class="card-body">Need 60 days to close because you're selling your current home first? Or want to move fast before rates shift? You can now negotiate the closing date to work for your life, not the seller's convenience.</p>
+                <div class="callout" role="note" aria-label="Dollar value">
+                    <p>💰 Flexibility prevents costly bridge loans or double rent situations. The value is in what you avoid.</p>
+                </div>
+                <p class="card-note">Timeline flexibility was essentially non-negotiable in a hot market. Not anymore.</p>
+                <div class="card-if">
+                    <span class="card-if-label">Ask for this if…</span>
+                    <p class="card-if-text">You're selling your current home at the same time. A flexible close gives you a cushion so you're not paying two mortgages — or scrambling to find temporary housing between transactions.</p>
+                </div>
+            </article>
+
+            <!-- 07 — full width -->
+            <article class="card card--wide" data-reveal>
+                <div class="card-inner">
+                    <div>
+                        <span class="card-bg-num" aria-hidden="true">07</span>
+                        <span class="card-num">07 /</span>
+                        <h3 class="card-title">The Home Warranty</h3>
+                        <p class="card-body">Ask the seller to include a one-year home warranty covering major systems — HVAC, plumbing, electrical. If something breaks in year one, you're not paying out of pocket.</p>
+                        <p class="card-note">Small ask. Huge peace of mind.</p>
+                        <div class="card-if">
+                            <span class="card-if-label">Ask for this if…</span>
+                            <p class="card-if-text">You're a first-time buyer or purchasing an older home. When you're already stretched thin on a new purchase, an unexpected $4,000 HVAC repair in month three can really sting.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="callout" role="note" aria-label="Dollar value">
+                            <p>💰 Costs the seller $500–$700. Could save you $5,000+ if the furnace goes out in February.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── BONUS ──────────────────────────────────────────── -->
+<section class="bonus" aria-labelledby="bonus-h">
+    <div class="bonus-wrap">
+        <span class="eyebrow eyebrow--light" data-reveal>Bonus</span>
+        <h2 class="bonus-headline" id="bonus-h" data-reveal data-delay="80">
+            There's Money Most Buyers<br>Don't Know About
+        </h2>
+        <p class="bonus-lead" data-reveal data-delay="140">
+            Utah has programs that can put real cash toward your purchase. Most buyers have no idea they exist.
+        </p>
+
+        <div class="bonus-cards" data-reveal data-delay="200">
+            <div class="bonus-card">
+                <span class="bonus-card-tag">First-Time Buyers · New Construction</span>
+                <p class="bonus-card-name">S.B. 240 Program</p>
+                <p class="bonus-card-amount">$20,000<sub> in assistance</sub></p>
+                <p class="bonus-card-desc">Down payment or closing cost help for first-time buyers on new construction under $450K. Launched July 2025 — most buyers still haven't heard of it.</p>
+            </div>
+            <div class="bonus-card">
+                <span class="bonus-card-tag">Utah Housing Corporation</span>
+                <p class="bonus-card-name">UHC FirstHome Loan</p>
+                <p class="bonus-card-amount">Up to 6%<sub> of loan amount</sub></p>
+                <p class="bonus-card-desc">Toward down payment and closing costs. Available to first-time buyers, qualifying single parents, and eligible veterans. Min. 660 credit score.</p>
+            </div>
+        </div>
+
+        <p class="bonus-note" data-reveal data-delay="260">
+            <strong>Not sure if you qualify?</strong> We can walk you through both programs in about 15 minutes. No strings attached — we promise.
+        </p>
+    </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="cta" aria-labelledby="cta-h">
+    <div class="wrap" style="display:flex;justify-content:center;">
+        <div class="cta-inner">
+            <span class="eyebrow" data-reveal>One Last Thing</span>
+            <h2 class="cta-headline" id="cta-h" data-reveal data-delay="80">
+                Knowing what to ask is<br><em>half</em> the battle.
+            </h2>
+            <p class="cta-body" data-reveal data-delay="160">
+                The other half is knowing <em>how</em> to ask — the timing, the framing, how to negotiate without spooking a seller who's already skittish. That's where having the right agent makes the difference between getting the deal and watching someone else get it.
+                <br><br>
+                We built MTN BUFF to educate first and sell second. If you want to talk through your specific situation — we're happy to do a free 15-minute call. No pitch. Just real conversation.
+            </p>
+            <div data-reveal data-delay="240">
+                <a href="https://mtnbuff.com/contact" class="btn" target="_blank" rel="noopener noreferrer">
+                    Book a Free 15-Min Call →
+                </a>
+                <p class="cta-aside">Or email contact@mtnbuff.com — we actually read those.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+    <div class="logo footer-logo" aria-label="MTN BUFF Real Estate">
+        <span class="logo-mtn">MTN</span>
+        <span class="logo-buff">BUFF</span>
+    </div>
+    <p class="footer-tagline">"Finding Your Shelter from Life's Storms"</p>
+    <div class="footer-links">
+        <a href="tel:3856006005">385-600-6005</a>
+        <span class="footer-sep">·</span>
+        <a href="mailto:contact@mtnbuff.com">contact@mtnbuff.com</a>
+        <span class="footer-sep">·</span>
+        <a href="https://mtnbuff.com" target="_blank" rel="noopener">mtnbuff.com</a>
+        <br>
+        727 24th Street, Suite 1 · Ogden, UT 84401
+    </div>
+    <p class="footer-disclaimer">
+        Data sourced from Redfin, Utah Association of REALTORS®, Weber County market records, and bestutahrealestate.com.
+        Market conditions change — this guide reflects conditions as of early 2026.
+        For current data specific to your search, consult your agent.
+    </p>
+</footer>
+
+<script>
+    // Scroll reveal
+    const els = document.querySelectorAll('[data-reveal]');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                const d = parseInt(e.target.dataset.delay) || 0;
+                setTimeout(() => e.target.classList.add('visible'), d);
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
