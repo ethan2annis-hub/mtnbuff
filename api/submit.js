@@ -17,14 +17,16 @@ module.exports = async function handler(req, res) {
     }
 
     const credentials = Buffer.from(`${apiKey}:`).toString('base64');
+    const headers = {
+        'Authorization': `Basic ${credentials}`,
+        'Content-Type': 'application/json',
+    };
 
     try {
-        const response = await fetch('https://api.followupboss.com/v1/events', {
+        // Step 1: Create the lead event in FUB
+        const eventRes = await fetch('https://api.followupboss.com/v1/events', {
             method: 'POST',
-            headers: {
-                'Authorization': `Basic ${credentials}`,
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify({
                 type: 'Property Inquiry',
                 source: 'Leverage Playbook',
@@ -35,10 +37,56 @@ module.exports = async function handler(req, res) {
             }),
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('FUB API error:', response.status, errorText);
-            return res.status(500).json({ error: 'Failed to create contact in FUB' });
+        if (!eventRes.ok) {
+            const errorText = await eventRes.text();
+            console.error('FUB events API error:', eventRes.status, errorText);
+            return res.status(500).json({ error: 'Failed to create lead in FUB' });
+        }
+
+        const eventData = await eventRes.json();
+        const personId = eventData?.person?.id;
+
+        if (!personId) {
+            console.error('No person ID returned from FUB event:', JSON.stringify(eventData));
+            return res.status(200).json({ success: true, warning: 'Lead created but action plan not assigned' });
+        }
+
+        // Step 2: Find the action plan by name
+        const plansRes = await fetch('https://api.followupboss.com/v1/actionPlans?limit=200', {
+            method: 'GET',
+            headers,
+        });
+
+        if (!plansRes.ok) {
+            console.error('FUB action plans fetch error:', plansRes.status);
+            return res.status(200).json({ success: true, warning: 'Lead created but could not fetch action plans' });
+        }
+
+        const plansData = await plansRes.json();
+        const plans = plansData?.actionPlans || [];
+        const plan = plans.find(p =>
+            p.name && p.name.toLowerCase().includes('lead magnet')
+        );
+
+        if (!plan) {
+            console.error('Action plan not found. Available plans:', plans.map(p => p.name));
+            return res.status(200).json({ success: true, warning: 'Lead created but action plan not found' });
+        }
+
+        // Step 3: Assign the action plan to the person
+        const assignRes = await fetch('https://api.followupboss.com/v1/actionPlansPeople', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+                personId: personId,
+                actionPlanId: plan.id,
+            }),
+        });
+
+        if (!assignRes.ok) {
+            const errorText = await assignRes.text();
+            console.error('FUB action plan assign error:', assignRes.status, errorText);
+            return res.status(200).json({ success: true, warning: 'Lead created but action plan assignment failed' });
         }
 
         return res.status(200).json({ success: true });
