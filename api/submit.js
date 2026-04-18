@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
         }
 
         const eventData = await eventRes.json();
-        const personId = eventData?.person?.id;
+        const personId = eventData?.person?.id || eventData?.personId || eventData?.id;
 
         if (!personId) {
             console.error('No person ID returned from FUB event:', JSON.stringify(eventData));
