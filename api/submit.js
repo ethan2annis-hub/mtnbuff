@@ -19,17 +19,19 @@ module.exports = async function handler(req, res) {
     const credentials = Buffer.from(`${apiKey}:`).toString('base64');
 
     try {
-        const response = await fetch('https://api.followupboss.com/v1/people', {
+        const response = await fetch('https://api.followupboss.com/v1/events', {
             method: 'POST',
             headers: {
                 'Authorization': `Basic ${credentials}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                firstName: firstName || '',
-                emails: [{ value: email }],
+                type: 'Property Inquiry',
                 source: 'Leverage Playbook',
-                tags: ['leverage-playbook'],
+                person: {
+                    firstName: firstName || '',
+                    emails: [{ value: email }],
+                },
             }),
         });
 
